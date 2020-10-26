@@ -1,0 +1,94 @@
+<mat-toolbar class="tollbar">
+    <h4> Order Details</h4>
+    <span class="example-spacer"></span>
+
+
+    <button mat-button [matMenuTriggerFor]="menu">
+        <button class="profileButton" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+            A
+        </button><span>Akshay K N</span></button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="fnLogOut()">Logout</button>
+    </mat-menu>
+
+
+</mat-toolbar>
+<div class="table-container">
+    <div class="table-default-content">
+        <div style="text-align: end;padding-top: 5px;">
+            <input class="searchinput" placeholder="Search" matInput (keyup)="applyFilter($event)" #input>
+            <!-- 
+            <button mat-raised-button (click)="fnOpenTaskDilod(null)"
+                style="background-color: #09A79E;color: #fff;margin-left: 10px;font-size: 11px;">&nbsp; ADD
+                TASK&nbsp;</button> -->
+
+        </div>
+
+
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="CustomerName">
+                <th mat-header-cell *matHeaderCellDef>Customer Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.CustomerName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="NoofItems">
+                <th mat-header-cell *matHeaderCellDef> No of Items </th>
+                <td mat-cell *matCellDef="let element"> {{element.NoofItems}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="TotalAmount">
+                <th mat-header-cell *matHeaderCellDef> TotalAmount </th>
+                <td mat-cell *matCellDef="let element"> {{element.TotalAmount}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button [matMenuTriggerFor]="menu" matTooltip="Click here to change order status">
+                        <span class="label-Received" *ngIf="element.Status == 'Received'">
+                            Received
+                        </span>
+                        <span class="label-Preparing" *ngIf="element.Status == 'Preparing'">
+                            Preparing
+                        </span>
+                        <span class="label-Ready" *ngIf="element.Status == 'Ready'">
+                            Ready
+                        </span>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="fnChangeStatus(element,'Received')">Received</button>
+                        <button mat-menu-item (click)="fnChangeStatus(element,'Preparing')">Preparing</button>
+                        <button mat-menu-item (click)="fnChangeStatus(element,'Ready')">Ready</button>
+
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <button class="apply-btn" mat-flat-button (click)="fnViewOrder(element)">View</button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+
+
+
+
+</div>

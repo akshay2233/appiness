@@ -1,0 +1,43 @@
+<div>
+    <div style="display: inline-block;">
+        <h2 mat-dialog-title>Order Details</h2>
+
+    </div>
+    <div style="display: inline-block;float: right;">
+        <button class="textButton" type="button" (click)="fnCancel()" mat-stroked-button>Close</button>
+
+    </div>
+
+</div>
+<mat-dialog-content class="mat-typography">
+    <div style="display: inline-block;" *ngIf="details">
+        <table>
+            <tr>
+                <th>Items Name</th>
+                <th>Price</th>
+            </tr>
+            <tr *ngFor="let items of details.items">
+                <td>{{items.itemname}}</td>
+                <td>{{items.amount}}</td>
+            </tr>
+            
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <th>Total Amount</th>
+                <th>{{details.TotalAmount}}</th>
+            </tr>
+
+        </table>
+    </div>
+
+
+</mat-dialog-content>
+<hr>
+<mat-dialog-actions style="display: block;">
+
+    <div>Name : {{details.CustomerName}}</div>
+    <div>Address : {{details.Addresss}}</div>
+
+</mat-dialog-actions>
